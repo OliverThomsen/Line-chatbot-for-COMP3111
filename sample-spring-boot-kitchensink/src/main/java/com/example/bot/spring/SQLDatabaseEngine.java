@@ -9,10 +9,28 @@ import java.net.URI;
 
 @Slf4j
 public class SQLDatabaseEngine extends DatabaseEngine {
+	
+
+	
 	@Override
 	String search(String text) throws Exception {
-		//Write your code here
-		return null;
+		
+		
+			Connection connection = getConnection();
+			PreparedStatement stmt = connection.prepareStatement(
+					"SELECT response FROM responsetable WHERE keyword = ?");
+			stmt.setString(1, text);
+			ResultSet rs = stmt.executeQuery();
+			String result = "";
+			while (rs.next()) {
+				result = rs.getString(1);
+			}
+			
+			rs.close();
+			stmt.close();
+			connection.close();
+			return result;
+		
 	}
 	
 	

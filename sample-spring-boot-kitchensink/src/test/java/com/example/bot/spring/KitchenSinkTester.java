@@ -42,49 +42,92 @@ import com.linecorp.bot.spring.boot.annotation.LineBotMessages;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
-import com.example.bot.spring.DatabaseEngine;
+import com.example.bot.spring.SQLDatabaseEngine;
 
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = { KitchenSinkTester.class, DatabaseEngine.class })
+@SpringBootTest(classes = { KitchenSinkTester.class, SQLDatabaseEngine.class })
 public class KitchenSinkTester {
 	@Autowired
-	private DatabaseEngine databaseEngine;
+	private SQLDatabaseEngine databaseEngine;
+	
+//	@Test
+//	public void testNotFound() throws Exception {
+//		boolean thrown = false;
+//		try {
+//			this.databaseEngine.search("no");
+//		} catch (Exception e) {
+//			thrown = true;
+//		}
+//		assertThat(thrown).isEqualTo(true);
+//	}
 	
 	@Test
-	public void testNotFound() throws Exception {
-		boolean thrown = false;
-		try {
-			this.databaseEngine.search("no");
-		} catch (Exception e) {
-			thrown = true;
-		}
-		assertThat(thrown).isEqualTo(true);
-	}
-	
-	@Test
-	public void testFound() throws Exception {
+	public void testHello() throws Exception {
 		boolean thrown = false;
 		String result = null;
 		try {
-			result = this.databaseEngine.search("abc");
+			result = this.databaseEngine.search("Hello");
 		} catch (Exception e) {
 			thrown = true;
 		}
 		assertThat(!thrown).isEqualTo(true);
-		assertThat(result).isEqualTo("def");
+		assertThat(result).isEqualTo("Wassup my man!");
 	}
 	
 	@Test
-	public void testHi() throws Exception {
+	public void testWho() throws Exception {
 		boolean thrown = false;
 		String result = null;
 		try {
-			result = this.databaseEngine.search("Hi");
+			result = this.databaseEngine.search("Who are you");
 		} catch (Exception e) {
 			thrown = true;
 		}
 		assertThat(!thrown).isEqualTo(true);
-		assertThat(result).isEqualTo("Hey, how are things going?");
+		assertThat(result).isEqualTo("I am a chatbot");
 	}
+	
+	@Test
+	public void testReal() throws Exception {
+		boolean thrown = false;
+		String result = null;
+		try {
+			result = this.databaseEngine.search("Are you real");
+		} catch (Exception e) {
+			thrown = true;
+		}
+		assertThat(!thrown).isEqualTo(true);
+		assertThat(result).isEqualTo("As real as bits and bytes");
+	}
+	
+	@Test
+	public void testEat() throws Exception {
+		boolean thrown = false;
+		String result = null;
+		try {
+			result = this.databaseEngine.search("Do you eat");
+		} catch (Exception e) {
+			thrown = true;
+		}
+		assertThat(!thrown).isEqualTo(true);
+		assertThat(result).isEqualTo("I only eat baby brains");
+	}
+	
+	
+	
+	
+	
+//	@Test
+//	public void testHi() throws Exception {
+//		boolean thrown = false;
+//		String result = null;
+//		try {
+//			result = this.databaseEngine.search("Hi");
+//		} catch (Exception e) {
+//			thrown = true;
+//		}
+//		assertThat(!thrown).isEqualTo(true);
+//		assertThat(result).isEqualTo("Hey, how are things going?");
+//	}
 }
